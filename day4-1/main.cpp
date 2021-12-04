@@ -31,11 +31,7 @@ public:
         auto[row, col] = number_to_pos.find(val)->second;
         number_to_pos.erase(val);
 
-        if (++marked_row.at(row) == DIMENSION) {
-            return calculate_remaining() * val;
-        }
-
-        if (++marked_col.at(col) == DIMENSION) {
+        if (++marked_row.at(row) == DIMENSION || ++marked_col.at(col) == DIMENSION) {
             return calculate_remaining() * val;
         }
 
@@ -43,7 +39,7 @@ public:
     }
 };
 
-std::multimap<int, bingo_board *> number_to_board;
+const std::multimap<int, bingo_board *> number_to_board;
 
 int main() {
     std::fstream fin("input.txt", std::fstream::in);
