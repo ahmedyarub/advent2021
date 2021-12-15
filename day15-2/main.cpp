@@ -10,21 +10,16 @@ int map[WIDTH][HEIGHT];
 int shortest_path[WIDTH][HEIGHT] = {0};
 
 void calc_risk(int start_i, int start_j) {
-    //std::cout << i << ',' << j << '\n';
-
     std::deque<std::pair<int, int>> point_queue;
 
     point_queue.emplace_back(start_i, start_j);
     shortest_path[start_i][start_j] = 0;
-//    int min_i = WIDTH;
-//    int min_j = HEIGHT;
 
     while (!point_queue.empty()) {
         auto cur_point = point_queue.front();
         point_queue.pop_front();
 
         auto[i, j] = cur_point;
-
 
         if (i + 1 <= (WIDTH - 1) &&
             (shortest_path[i + 1][j] == 0 || shortest_path[i][j] + map[i + 1][j] < shortest_path[i + 1][j])) {
@@ -49,12 +44,7 @@ void calc_risk(int start_i, int start_j) {
             shortest_path[i][j - 1] = shortest_path[i][j] + map[i][j - 1];
             point_queue.emplace_back(i, j - 1);
         }
-
-
-        //std::cout << cur_total << ',' << shortest_path[i][j] << '\n';
     }
-
-    //std::cout << cur_total << ',' << shortest_path[i][j] << '\n';
 }
 
 int main() {
@@ -85,13 +75,6 @@ int main() {
 
         j++;
     }
-
-//    for (int i = 0; i < WIDTH; i++) {
-//        for (int j = 0; j < HEIGHT; j++) {
-//            std::cout << (int) map[i][j];
-//        }
-//        std::cout << '\n';
-//    }
 
     calc_risk(0, 0);
 
