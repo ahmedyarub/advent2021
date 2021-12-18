@@ -10,15 +10,11 @@ int map[WIDTH][HEIGHT];
 int shortest_path[WIDTH][HEIGHT] = {0};
 
 void calc_risk(int i, int j, int prev_total) {
-    //std::cout << i << ',' << j << '\n';
-
     if (i < 0 || j < 0 || i == WIDTH || j == HEIGHT) {
         return;
     }
 
     int cur_total = prev_total + map[i][j];
-
-    //std::cout << cur_total << ',' << shortest_path[i][j] << '\n';
 
     if (shortest_path[i][j] == 0 || cur_total < shortest_path[i][j]) {
         shortest_path[i][j] = cur_total;
